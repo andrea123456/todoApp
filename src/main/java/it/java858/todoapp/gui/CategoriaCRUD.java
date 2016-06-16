@@ -7,6 +7,7 @@ package it.java858.todoapp.gui;
 
 import it.java858.todoapp.Categoria;
 import it.java858.todoapp.service.CategoriaService;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -58,6 +59,11 @@ public class CategoriaCRUD extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tblCategorie);
 
         cmdModifica.setText("modifica");
+        cmdModifica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificaActionPerformed(evt);
+            }
+        });
 
         cmdCancella.setText("cancella");
         cmdCancella.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +110,18 @@ public class CategoriaCRUD extends javax.swing.JDialog {
         categoriaTM.changeData(CategoriaService.findAll());
         
     }//GEN-LAST:event_cmdCancellaActionPerformed
+
+    private void cmdModificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificaActionPerformed
+        // prendo la categoria selezionata
+         Categoria toEdit=categoriaTM.get
+          (tblCategorie.convertRowIndexToModel(tblCategorie.getSelectedRow()));
+         CategoriaEdit editView= new CategoriaEdit(toEdit, this, true);
+         editView.setLocationRelativeTo(this);
+         editView.setVisible(true);
+        
+    }//GEN-LAST:event_cmdModificaActionPerformed
+
+
 
     /**
      * @param args the command line arguments

@@ -22,7 +22,31 @@ public class CategoriaEdit extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    private Categoria categoria ;
+public CategoriaEdit(Categoria categoria, java.awt.Dialog parent, boolean modal){
+    super (parent, modal);
+    initComponents();
+   init(categoria);
+   
+}
+public CategoriaEdit(Categoria categoria, java.awt.Frame parent, boolean modal){
+    super (parent, modal);
+    initComponents();
+    this.setTitle("Crea o Modifica Categoria");
+    init(categoria);
 
+    
+}
+
+public void modelToView(){
+    txtnome.setText(categoria.getNome());
+}
+
+public void ViewToModel(){
+    categoria.setNome(txtnome.getText());
+    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,9 +117,11 @@ public class CategoriaEdit extends javax.swing.JDialog {
 
     private void cmdSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalvaActionPerformed
         // TODO add your handling code here:
-        Categoria newc= new Categoria();
-        newc.setNome(txtnome.getText());
-        CategoriaService.save(newc);
+       ViewToModel();
+        //Categoria newc= new Categoria();
+        //newc.setNome(txtnome.getText());
+        //CategoriaService.save(newc);
+       CategoriaService.save(categoria);
         JOptionPane.showMessageDialog(this,"categoria salvata");
         close();
         
@@ -118,4 +144,11 @@ public class CategoriaEdit extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtnome;
     // End of variables declaration//GEN-END:variables
+
+    private void init(Categoria categoria) {
+         this.categoria=categoria;
+         txtnome.setText(categoria.getNome());
+         modelToView();
+         
+    }
 }
